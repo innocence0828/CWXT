@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wh.dao.PushDao">
+	<!-- 插入推送流水 -->
+	<insert id="getBoolean" parameterType="java.util.Map" >
+		<!-- <selectKey keyProperty="f_Id" resultType="java.lang.String"
+			order="BEFORE">
+			select replace(uuid(),'-','') from dual
+		</selectKey> -->
+		INSERT INTO bs_pushFlow ( F_ID,F_PUSH_DATE,F_STATIC,F_NOTE,F_INSERTDATE,
+		F_USERID,F_CID)VALUES(#{f_Id}, #{f_Push_date}, #{f_Static}, #{f_Note},
+		 #{f_Insertdate}, #{f_Userid}, #{f_Cid} )
+	</insert>
+	
+	<!-- 查询推送流水 -->
+	<select id="getselectPushAll" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from bs_pushFlow
+		<where>
+			<if test="f_Id !=null and f_Id !=''">
+			  and F_ID = #{f_Id}
+			</if>
+			<if test="f_Userid !=null and f_Userid !=''">
+			  and F_USERID = #{f_Userid}
+			</if>
+			<if test="f_StartDate !=null and f_StartDate !=''">
+			  and F_INSERTDATE >= #{f_StartDate}
+			</if>
+			<if test="f_EndDate !=null and f_EndDate !=''">
+			  and F_INSERTDATE <![CDATA[<]]>=#{f_EndDate}
+			</if>
+		</where>
+		ORDER BY F_INSERTDATE desc  limit #{f_StartPage},#{f_NumPage}
+	</select>
+	
+	<update id="updateTaskStatus" parameterType="java.util.Map">
+		update bs_pushFlow set F_STATIC=#{status} where F_ID = #{f_Id}
+	</update>
+	
+	<!-- 删除流水表 -->
+	<delete id="getDeletetPushOne" parameterType="java.util.Map"  >
+		delete from bs_pushFlow
+		<where>
+			<if test="f_Id !=null and f_Id !=''">
+			  and F_ID = #{f_Id}
+			</if>
+		</where>
+	</delete>
+	
+	<!-- 更新流水表 -->
+	<update id="getUpdatetPushOne" parameterType="java.util.Map" >
+		update bs_pushFlow 
+		<set>
+			<if test="f_Push_date !=null and f_Push_date !=''">  
+			and F_PUSH_DATE = #{f_Push_date}  </if>
+			<if test="f_Static !=null and f_Static !=''"> 
+			 and F_STATIC = #{f_Static}  </if>
+			<if test="f_Note !=null and f_Note !=''"> 
+			 and F_NOTE = #{f_Note}  </if>
+		</set>
+		<where>
+			<if test="f_Id !=null and f_Id !=''">  and F_ID = #{f_Id} </if>
+		</where>
+	</update>
+	
+</mapper>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 首页图表查询 -->
+<mapper namespace="com.wh.dao.HomeDao">
+	
+	<!-- 四项图标查询查询-->
+	<select id="getheadFourDatas"  parameterType="java.util.Map"  resultType="java.util.Map">
+		select max(cast((case f_direction_type when 1 then f_money else 0 end) as decimal )) maxOutMoney,count(1) sum,
+		round(sum(case f_direction_type when 0 then f_money else 0 end),2) inMoney,
+		round(sum(case f_direction_type when 1 then f_money else 0 end),2) outMoney,
+		round(sum(case f_direction_type when 0 then f_money else 0 end) - sum(case f_direction_type when 1 then f_money else 0 end),2) leaveMoney 
+		from bs_bookflow 
+		<where>
+			<if test="f_UserId !=null and f_UserId!='' ">
+				and f_UserId = ${f_UserId} 
+			</if>
+		</where>
+	</select>
+	
+	<!-- 收入支出-->
+	<select id="getMonthInOut"  parameterType="java.util.Map"  resultType="java.util.Map">
+		select round(sum(case f_direction_type when 0 then f_money else 0 end),2) 收入,
+		round(sum(case f_direction_type when 1 then f_money else 0 end),2) 支出,
+		round(sum(case f_direction_type when 0 then f_money else 0 end) - sum(case f_direction_type when 1 then f_money else 0 end),2) 余额 
+		from bs_bookflow 
+		<where>
+			<if test="f_Date !=null and f_Date!='' ">
+				and F_DATE like CONCAT('%','${f_Date}','%' ) 
+			</if>
+			<if test="f_UserId !=null and f_UserId!='' ">
+				and f_UserId = ${f_UserId} 
+			</if>
+		</where>
+	</select>
+	
+	<!-- 消费分类型查询 -->
+	<select id="getConsumeType"  parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT round(sum(boo.F_MONEY), 2) typeMoney,(case when bus.F_CAPTION is null then '其他' else bus.F_CAPTION end) typeName,
+		(case when boo.F_CONSUME_TYPE is null then 'other' else boo.F_CONSUME_TYPE end) typeCode
+		FROM bs_bookflow boo LEFT JOIN ba_businessdct bus ON boo.F_CONSUME_TYPE = bus.F_NUMBER
+         <where>
+         	  and boo.f_direction_type = '1'
+			<if test="f_Date !=null and f_Date!='' ">
+				and boo.F_DATE like CONCAT('%','${f_Date}','%' ) 
+			</if>
+			<if test="f_UserId !=null and f_UserId!='' ">
+				and f_UserId = ${f_UserId} 
+			</if>
+		</where>
+         group by boo.f_consume_type,bus.f_caption union all
+	    select round( sum( case book.f_direction_type when 1 then book.f_money else 0 end ),2) typeMoney,
+		'合计' typeName, 'sum' typeCode FROM bs_bookflow book
+	</select>
+	
+	<!-- 每年月份收支分类-->
+	<select id="getInOutType"  parameterType="java.util.Map" resultType="java.util.Map">
+		select round(sum(case F_DIRECTION_TYPE when 0 then F_MONEY else 0 end),2) inMoney,
+		round(sum(case F_DIRECTION_TYPE when 1 then F_MONEY else 0 end),2) outMoney,
+		round(sum(case F_DIRECTION_TYPE when 0 then F_MONEY else 0 end) - sum(case F_DIRECTION_TYPE when 1 then F_MONEY else 0 end),2) leaveMoney, 
+		REPLACE(LEFT (F_DATE, 7),'-','') fsDate
+		from bs_bookflow   
+		<where>
+			<if test="f_Date !=null and f_Date!='' ">
+				and F_DATE like CONCAT('%','${f_Date}','%' ) 
+			</if>
+			<if test="f_UserId !=null and f_UserId!='' ">
+				and f_UserId = ${f_UserId} 
+			</if>
+		</where>
+		GROUP BY REPLACE(LEFT (F_DATE, 7),'-','') 
+		order by fsDate
+	</select>
+	
+</mapper>

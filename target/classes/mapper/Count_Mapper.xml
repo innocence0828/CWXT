@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 综合统计分析 -->
+<mapper namespace="com.wh.dao.CountDao">
+	
+	<!-- 统计分析表查询-->
+	<select id="getListCount"  parameterType="com.wh.entity.CountInfo"  resultType="com.wh.entity.CountInfo">
+		select F_DATE,
+		max(case F_DIRECTION_TYPE when '0' then F_MONEY else 0 end ) f_Income,
+		max(case F_DIRECTION_TYPE when '1' then F_MONEY else 0 end ) f_Expense,
+		(max(case F_DIRECTION_TYPE when '0' then F_MONEY else 0 end ) - max(case F_DIRECTION_TYPE when '1' then F_MONEY else 0 end )) f_Balance
+		from( SELECT LEFT (F_DATE, 7) F_DATE,
+		 IF (F_DIRECTION_TYPE = '0','0','1') F_DIRECTION_TYPE,round(sum(F_MONEY), 2) F_MONEY FROM bs_bookflow
+		<where>
+			<if test="f_Date !=null ">
+				AND F_DATE like CONCAT('%','${f_Date}','%' ) 
+			</if>
+			<if test="f_UserId !=null ">
+				AND F_USERID = #{f_UserId} 
+			</if>
+		</where>
+		GROUP BY LEFT (F_DATE, 7),F_DIRECTION_TYPE ORDER BY F_DATE,F_DIRECTION_TYPE ) TAB group by F_DATE
+	</select>
+	
+</mapper>

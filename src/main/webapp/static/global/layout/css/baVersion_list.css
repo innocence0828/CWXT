@@ -1,0 +1,152 @@
+.main{
+	position:absolute;
+	left:0px;
+	top:0px;
+	bottom:0px;
+	right:0px;
+}
+.header{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+	background: url(../img/breadcrumbs.png) repeat;
+    border-bottom: solid 1px #eee;
+}
+.header > h2{
+	padding: 0 0 7px 20px;
+	width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: normal;
+}
+.main-top{
+	position: absolute;
+	top:82px;
+	left:0px;
+	right:0px;
+}
+.main-bottom{
+	position: absolute;
+	top:156px;
+	left:10px;
+	right:10px;
+	bottom:10px;
+	border:1px solid #ddd;
+}
+
+.btn-u {
+    border: 0;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 400;
+    padding: 4px 13px;
+    position: relative;
+    background: #72c02c;
+    display: inline-block;
+    text-decoration: none;
+}
+.btn-u-lg, a.btn-u-lg {
+    font-size: 18px;
+    padding: 10px 25px;
+}
+.btn-u {
+    background: #1abc9c;
+}
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.fa-cloud-upload::before {
+    content: "\f0ee";
+}
+li{
+	list-style: none;
+}
+.main-top >p{
+	margin: 0px;
+    margin-left: 50px;
+    padding: 10px;
+}
+.ul-header{
+	border: 1px solid #eee;
+	margin: 0px;
+    padding: 16px 37px;
+}
+.ul-header > li:before{
+	content:"序号";
+	padding: 0px 5px;
+	width: 46px;
+    display: inline-block;
+}
+.ul-body{
+	counter-reset: slideNum;
+	margin: 0px;
+    padding: 0px;
+    overflow: auto;
+    position: absolute;
+    top: 55px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+.ul-body > li{
+	padding: 5px 0px;
+	counter-increment: slideNum;  
+	padding: 5px 37px;
+	border-bottom: 1px solid #eee;
+}
+.ul-body > li span:last-child{
+	width:160px;
+}
+.ul-body > li span:last-child a{
+    width: 70px;
+    display: inline-block;
+    text-align: center;
+}
+.ul-body > li span:last-child a:hover{
+    color:red;
+    cursor:pointer;
+}
+.ul-body > li:before{
+	width: 26px;
+    display: inline-block;
+	content: counter(slideNum);
+	padding:0px 16px;
+}
+.main-bottom span{
+    display: inline-block;
+    width: calc(25% - 55.5px);
+}
+.hide{
+	display:none;
+}
+.show{
+	display:block;
+}
+#form-box{
+	position: absolute;
+	top:120px;
+	left:200px;
+	right:200px;
+	border: 1px solid #eee;
+	font-weight: 400;
+}
+#form-box li{
+	height: 41px;
+    line-height: 41px;
+}
+#form-box li > span{
+	width: 109px;
+    display: inline-block;
+}
+#form-box li > input{
+	height: 23px;
+	width:280px;
+	padding:2px 5px;
+}

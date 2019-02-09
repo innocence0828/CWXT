@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 综合统计分析 -->
+<mapper namespace="com.wh.dao.BsBookflowDao">
+	
+	<!-- 分页查询-->
+	<select id="getListBookFlow" parameterType="java.util.Map" resultType="com.wh.entity.BsBookFlow">
+		select * from bs_bookflow
+		<where>
+			<if test="startDate !=null and startDate!='' ">
+				and F_DATE >= #{startDate}
+			</if>
+			<if test="endDate !=null and endDate!='' ">
+				and F_DATE <![CDATA[<]]>=#{endDate}
+			</if>
+			<if test="f_Direction_type !=null and f_Direction_type!='' ">
+				and F_DIRECTION_TYPE =#{f_Direction_type}
+			</if>
+			<if test="f_Consume_type !=null and f_Consume_type!='' ">
+				and F_CONSUME_TYPE =#{f_Consume_type}
+			</if>
+			<if test="f_Account_type !=null and f_Account_type!='' ">
+				and F_ACCOUNT_TYPE =#{f_Account_type}
+			</if>
+			<if test="f_UserId !=null and f_UserId!='' ">
+				and F_USERID =#{f_UserId}
+			</if>
+		</where>
+		ORDER BY F_DATE desc limit #{startPage},#{numPage}
+	</select>
+	
+	<!-- 获取用户所有信息并且要分页查询 -->
+	<select id="getListCount"  parameterType="java.util.Map" resultType="java.util.Map">
+		select count(1) numItem,
+		round(sum(case F_DIRECTION_TYPE when 0 then F_MONEY else 0 end),2) inPrice,
+		round(sum(case F_DIRECTION_TYPE when 1 then F_MONEY else 0 end),2) outPrice,
+		round(sum(case F_DIRECTION_TYPE when 0 then F_MONEY else 0 end) - sum(case F_DIRECTION_TYPE when 1 then F_MONEY else 0 end),2) totalPrice 
+		from bs_bookflow
+		<where>
+			<if test="startDate !=null and startDate!='' ">
+				and F_DATE >= #{startDate}
+			</if>
+			<if test="endDate !=null and endDate!='' ">
+				and F_DATE <![CDATA[<]]>=#{endDate}
+			</if>
+			<if test="f_Direction_type !=null and f_Direction_type!='' ">
+				and F_DIRECTION_TYPE =#{f_Direction_type}
+			</if>
+			<if test="f_Consume_type !=null and f_Consume_type!='' ">
+				and F_CONSUME_TYPE =#{f_Consume_type}
+			</if>
+			<if test="f_Account_type !=null and f_Account_type!='' ">
+				and F_ACCOUNT_TYPE =#{f_Account_type}
+			</if>
+			<if test="f_UserId !=null and f_UserId!='' ">
+				and F_USERID =#{f_UserId}
+			</if>
+		</where>
+	</select>
+	
+</mapper>

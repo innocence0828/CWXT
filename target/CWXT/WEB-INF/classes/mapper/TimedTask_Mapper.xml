@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace：必须与对应的接口全类名一致id:必须与对应接口的某个对应的方法名一致 -->
+<mapper namespace="com.wh.dao.TimedTaskDao">
+
+	<!--复制到bs_copy_bookFlow流水表里-->
+	<insert id="copyAddAllData" parameterType="java.util.List" >
+		INSERT INTO bs_copy_bookFlow ( F_ID,F_DATE,F_DIRECTION_TYPE,F_NOTE,F_MONEY,
+		F_CAPTION,F_IMGURL,F_ACCOUNT_TYPE,F_CONSUME_TYPE,F_USERID,F_UPDATE) SELECT 
+		F_ID,F_DATE,F_DIRECTION_TYPE,F_NOTE,F_MONEY,F_CAPTION,F_IMGURL,F_ACCOUNT_TYPE,
+	    F_CONSUME_TYPE,F_USERID,NOW() FROM bs_bookflow
+	</insert>
+	
+	<!-- 将数据最新数据更新至测试库中 -->
+	<insert id="insertToTestDB">
+		insert into dbwhjt_test.bs_bookflow 
+		select * from dbwhjt.bs_bookflow b
+		where not exists (select 1 from dbwhjt_test.bs_bookflow t where b.F_ID = t.F_ID)
+	</insert>
+	
+	<!--删除bs_copy_bookFlow流水表里-->
+	<delete id="copyDeleteBookFlows">
+		delete from bs_copy_bookFlow
+	</delete>
+
+	<!-- 查出一条或多条消费信息 -->
+	<select id="loadBookFlowsData"  resultType="java.lang.String" >
+		select F_IMGURL from bs_bookflow where F_IMGURL is not null ORDER BY f_date desc
+	</select>
+
+	<!-- 查出一条或多条用户表 -->
+	<select id="loadUserInfo"  resultType="java.lang.String" >
+		select F_IMGURL from ba_userinfo where F_IMGURL is not null
+	</select>
+
+</mapper>

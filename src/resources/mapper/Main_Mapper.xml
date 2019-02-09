@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace：必须与对应的接口全类名一致id:必须与对应接口的某个对应的方法名一致 -->
+<mapper namespace="com.wh.dao.MainDao">
+
+	<!-- mybsits_config中配置的alias类别名,也可直接配置resultType为类路径 -->
+	<insert id="addALL" parameterType="java.util.Map">
+		insert into
+		bs_bookflow(F_ID,F_DATE,F_DIRECTION_TYPE,F_NOTE,F_MONEY,F_CAPTION,F_IMGURL
+		,F_ACCOUNT_TYPE,F_CONSUME_TYPE,F_USERID)values
+		<foreach collection="list" item="bookFlow" index="index"
+			separator=",">
+			(#{bookFlow.f_Id},#{bookFlow.f_Date},#{bookFlow.f_Direction_type},#{bookFlow.f_Note}
+			,#{bookFlow.f_Money},#{bookFlow.f_Caption},#{bookFlow.f_Imgurl}
+			,#{bookFlow.f_Account_type},#{bookFlow.f_Consume_type},#{f_UserId})
+		</foreach>
+	</insert>
+
+	<!-- 添加单个信息 -->
+	<insert id="addBookFlow" parameterType="com.wh.entity.BsBookFlow">
+		<selectKey keyProperty="f_Id" resultType="java.lang.String"
+			order="BEFORE">
+			select replace(uuid(),'-','') from dual
+		</selectKey>
+		insert into
+		bs_bookflow(F_ID,F_DATE,F_DIRECTION_TYPE,F_NOTE,F_MONEY,F_CAPTION,F_IMGURL
+		,F_ACCOUNT_TYPE,F_CONSUME_TYPE,F_USERID,F_POSITION,F_ADDRESS)values(#{f_Id},#{f_Date},#{f_Direction_type},#{f_Note},#{f_Money}
+		,#{f_Caption},#{f_Imgurl},#{f_Account_type},#{f_Consume_type},#{f_UserId},#{f_Position},#{f_Address})
+	</insert>
+
+	<!-- 更新单个信息 -->
+	<update id="updatebookFlow" parameterType="com.wh.entity.BsBookFlow">
+		update bs_bookflow
+		<set>
+			<if test="f_Date !=null"> F_DATE=#{f_Date},</if>
+			<if test="f_Direction_type !=null"> F_DIRECTION_TYPE=#{f_Direction_type},</if>
+			<if test="f_Note !=null"> F_NOTE=#{f_Note},</if>
+			<if test="f_Money !=null"> F_MONEY=#{f_Money},</if>
+			<if test="f_Caption !=null"> F_CAPTION=#{f_Caption},</if>
+			<if test="f_Imgurl !=null"> F_IMGURL=#{f_Imgurl},</if>
+			<if test="f_Account_type !=null"> F_ACCOUNT_TYPE=#{f_Account_type}, </if>
+			<if test="f_Consume_type !=null"> F_CONSUME_TYPE=#{f_Consume_type}, </if>
+			<if test="f_UserId !=null"> F_USERID=#{f_UserId},</if>
+		</set>
+		<where>
+			<if test="f_Id !=null"> and F_ID=#{f_Id} </if>
+		</where>
+	</update>
+
+	<!--单个删除表 -->
+	<delete id="deleteBookflowf_Id" parameterType="java.lang.String">
+		delete from bs_bookflow
+		<where>
+			<if test="_parameter !=null"> and F_ID=#{_parameter} </if>
+		</where>
+	</delete>
+
+	<!--整个对应用户的表删除表 -->
+	<delete id="deleteBookFlows" parameterType="java.lang.String">
+		delete from bs_bookflow
+		<where>
+			<if test="_parameter !=null"> and F_USERID=#{_parameter} </if>
+		</where>
+	</delete>
+
+	<!-- 查询单个信息 -->
+	<select id="getBookflowf_Id" parameterType="java.lang.String"
+		resultType="com.wh.entity.BsBookFlow">
+		select * from bs_bookflow
+		<where>
+			<if test="_parameter !=null"> and F_ID=#{_parameter}</if>
+		</where>
+	</select>
+
+	<!-- 查询全部信息 -->
+	<select id="getAllBookFlow" resultType="com.wh.entity.BsBookFlow">
+		SELECT flow.F_ID,
+		flow.F_DATE,flow.F_USERID,dct1.F_CAPTION F_DIRECTION_TYPE,
+		flow.F_NOTE, flow.F_MONEY,
+		flow.F_CAPTION,flow.F_IMGURL, dct2.F_CAPTION F_ACCOUNT_TYPE, dct3.F_CAPTION F_CONSUME_TYPE
+		FROM
+		bs_bookflow flow
+		left join ba_businessdct dct1 on (flow.F_DIRECTION_TYPE = dct1.F_NUMBER
+		and dct1.F_PARENT = '3')
+		left join ba_businessdct dct2 on
+		(flow.F_ACCOUNT_TYPE = dct2.F_NUMBER and dct2.F_PARENT = '2')
+		left join
+		ba_businessdct dct3 on (flow.F_CONSUME_TYPE = dct3.F_NUMBER and
+		dct3.F_PARENT = '1')
+		order by F_DATE DESC
+	</select>
+
+	<!-- 获取用户所有信息并且要分页查询 -->
+	<select id="getListBookFlowsPage" parameterType="com.wh.entity.Pagination"
+		resultType="com.wh.entity.BsBookFlow">
+		select * from bs_bookflow
+		<where>
+			<if test="startDate !=null ">
+				and F_DATE >= #{startDate}
+			</if>
+			<if test="endDate !=null ">
+				and F_DATE <![CDATA[<]]>=#{endDate}
+			</if>
+			<if test="f_Direction_type !=null ">
+				and F_DIRECTION_TYPE =#{f_Direction_type}
+			</if>
+			<if test="f_Consume_type !=null ">
+				and F_CONSUME_TYPE =#{f_Consume_type}
+			</if>
+			<if test="f_Account_type !=null ">
+				and F_ACCOUNT_TYPE =#{f_Account_type}
+			</if>
+			<if test="f_UserId !=null ">
+				and F_USERID =#{f_UserId}
+			</if>
+		</where>
+		ORDER BY F_DATE desc limit #{startPage},#{numPage}
+	</select>
+
+	<!-- 总条数和总价格sql查询 -->
+	<select id="getTotalItemPrice" parameterType="com.wh.entity.Pagination"
+		resultType="com.wh.entity.TotalPaginationitem">
+		select count(1) numItem,round(sum(bookf1.F_MONEY),2) totalPrice from
+		bs_bookflow bookf1
+		<where>
+			<if test="startDate !=null ">
+				and bookf1.F_DATE > #{startDate}
+			</if>
+			<if test="endDate !=null ">
+				and bookf1.F_DATE <![CDATA[<]]>#{endDate}
+			</if>
+			<if test="f_Direction_type !=null ">
+				and bookf1.F_DIRECTION_TYPE =#{f_Direction_type}
+			</if>
+			<if test="f_Consume_type !=null ">
+				and bookf1.F_CONSUME_TYPE =#{f_Consume_type}
+			</if>
+			<if test="f_Account_type !=null ">
+				and bookf1.F_ACCOUNT_TYPE =#{f_Account_type}
+			</if>
+			<if test="f_UserId !=null ">
+				and bookf1.F_USERID =#{f_UserId}
+			</if>
+		</where>
+	</select>
+
+	<!-- 查询查询字典表 -->
+	<select id="getZdb" parameterType="com.wh.entity.Pagination"
+		resultType="com.wh.entity.BaBusinessdct">
+		SELECT bbct.f_parent,bbct.f_number,bbct.f_caption FROM ba_businessdct bbct
+		<where>
+			<if test="_parameter !=null ">
+				and bbct.F_PARENT =#{_parameter}
+			</if>
+		</where>
+	</select>
+
+</mapper>

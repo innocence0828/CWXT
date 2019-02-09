@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="gexin-rp-fastjson-1.0.0.1 (2)">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/gt/gexin-rp-fastjson-1.0.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/gt/gexin-rp-sdk-template-4.0.0.16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/gt/gexin-rp-sdk-base-4.0.0.22.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/gt/gexin-rp-sdk-http-4.0.1.17.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

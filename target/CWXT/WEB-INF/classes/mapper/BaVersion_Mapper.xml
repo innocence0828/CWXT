@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 版本更新表 -->
+<mapper namespace="com.wh.dao.BaVersionDao">
+
+	<!-- 插入版本更新表 -->
+	<insert id="verInertData" parameterType="com.wh.entity.BaVersionInfo">
+		<selectKey keyProperty="f_Id" resultType="java.lang.String" order="BEFORE">
+		        select  replace(uuid(),'-','')   from dual
+		</selectKey>
+		INSERT INTO ba_versionInfo (F_ID,F_VERID,F_VERDESB,F_VERTITLE,F_FILENAME,F_CRTTIME,F_URL) 
+		VALUES(#{f_Id},#{f_Verid},#{f_Verdesb},#{f_Vertitle},#{f_Filename},#{f_Crttime},#{f_Url})
+	</insert>
+	
+	<!-- 查出一条或多条版本更新表 -->
+	<select id="getVerQuery" parameterType="java.lang.String" resultType="com.wh.entity.BaVersionInfo" >
+		select * from ba_versionInfo
+		<where>
+			<if test="_parameter !=null">
+		 		and F_FILENAME=#{_parameter} 
+		    </if>
+		</where>
+		order by F_VERID DESC
+	</select>
+	
+	<!-- 删除一条或多条版本更新表 -->
+	<delete id="delVer" parameterType="java.lang.String" >
+		delete from ba_versionInfo
+		<where>
+			<if test="_parameter !=null">
+		 		and F_ID=#{_parameter} 
+		    </if>
+		</where>
+	</delete>
+	
+	<!-- 查出一条下载路径 -->
+	<select id="downQuery" parameterType="java.lang.String" resultType="java.lang.String" >
+		select F_URL  from ba_versionInfo 
+		<where>
+			<if test="_parameter !=null">
+		 		and F_FILENAME=#{_parameter}
+		    </if>
+		</where>
+		 order by F_VERID desc limit 1
+	</select>
+</mapper>

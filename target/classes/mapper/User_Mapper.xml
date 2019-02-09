@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!-- namespace：必须与对应的接口全类名一致id:必须与对应接口的某个对应的方法名一致 -->
+<mapper namespace="com.wh.dao.UserDao">
+
+	
+	<!-- 登录用户-->
+	<select id="loginId"  parameterType="java.lang.String" resultType="java.lang.String">
+		 select F_PASSWORD from ba_userinfo 
+			<where>
+				<if test="_parameter !=null ">
+					and F_USERID=#{_parameter}
+				</if>
+			</where>
+	</select>
+	
+	<!-- 获取用户信息-->
+	<select id="getUserInfo"  parameterType="java.lang.String" resultType="com.wh.entity.UserInfo">
+		 select * from ba_userinfo 
+			<where>
+				<if test="_parameter !=null ">
+					and F_USERID=#{_parameter}
+				</if>
+			</where>
+		
+	</select>
+	
+	<!-- 更新用户信息-->
+	<update id="getUpdateUserInfo"  parameterType="com.wh.entity.UserInfo">
+	
+		update ba_userinfo 
+		<set>
+			<if test="f_Email !=null"> F_EMAIL=#{f_Email},</if>
+			<if test="f_ImgUrl !=null"> F_IMGURL=#{f_ImgUrl},</if>
+			<if test="f_UserName !=null"> F_USERNAME=#{f_UserName},</if>
+		</set>
+		<where>
+			<if test="_parameter !=null ">
+				and F_USERID=#{f_UserId}
+			</if>
+		</where>
+	</update>
+	
+	<!-- 注册用户 -->
+	<insert id="insertReg" parameterType="com.wh.entity.UserInfo">
+		<selectKey keyProperty="f_Id" resultType="java.lang.String" order="BEFORE">
+        	select  replace(uuid(),'-','')   from dual
+    	</selectKey>
+	insert into ba_userinfo (F_ID,F_USERID,F_USERNAME,F_EMAIL,F_IMGURL,F_PASSWORD)values(#{f_Id},#{f_UserId}
+	,#{f_UserName},#{f_Email},#{f_ImgUrl},#{f_PassWord})
+	</insert>
+	
+	<insert id="drhTest" parameterType="String" useGeneratedKeys="true" keyProperty="F_ID">
+		insert into TEST_TABLE(F_MC) values(#{value}) 
+	</insert>
+	
+	<!-- 添加regPhone数据 -->
+	<insert id="addRegPhone" parameterType="com.wh.entity.BsRegPhone" >
+		<selectKey keyProperty="f_Id" resultType="java.lang.String" order="BEFORE">
+        	select  replace(uuid(),'-','')  from dual
+    	</selectKey>
+		insert into
+		bs_regPhone(F_ID,F_PHONE,F_PHONECODE)values(#{f_Id},#{f_Phone},#{f_PhoneCode})
+	</insert>
+	
+	<!--regPhone查询-->
+	<select id="queryRegPhone"  parameterType="java.lang.String" resultType="java.lang.String">
+		 select F_PHONECODE from bs_regPhone 
+			<where>
+				<if test="_parameter !=null ">
+					and F_PHONE=#{_parameter}
+				</if>
+			</where>
+		
+	</select>
+	<!-- 更新regPhone-->
+	<update id="updateRegPhone"  parameterType="com.wh.entity.BsRegPhone">
+	
+		update bs_regPhone 
+		<set>
+			<if test="f_PhoneCode !=null"> F_PHONECODE=#{f_PhoneCode},</if>
+		</set>
+		<where>
+			<if test="f_Phone !=null ">
+				and F_PHONE=#{f_Phone}
+			</if>
+		</where>
+	</update>
+	
+	
+</mapper>

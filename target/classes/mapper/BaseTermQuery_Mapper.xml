@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 基础数据分析 -->
+<mapper namespace="com.wh.dao.BaseTermQueryDao">
+	
+	<!-- 基础数据查询-->
+	<select id="getTermQuery"  parameterType="java.lang.String"  resultType="java.util.Map">
+		select f_parent type1,f_number key1,f_caption value1 from ba_businessdct
+		<where>
+			<if test="_parameter !=null">
+				and f_parent = #{_parameter} 
+			</if>
+		</where>
+	</select>
+	
+</mapper>
