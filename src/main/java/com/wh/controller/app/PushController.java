@@ -17,7 +17,9 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/pushController")
 public class PushController {
-
+    /**
+     * 提交人李云文
+     */
 	@Autowired
 	private PushService pushService;
 	String stringRtrue;
