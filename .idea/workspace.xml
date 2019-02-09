@@ -43,7 +43,7 @@
     <session id="914012604">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="58" />
+          <entry key="project.closed" value="59" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="4" />
           <entry key="project.open.time.11" value="1" />
@@ -55,7 +55,7 @@
           <entry key="project.open.time.2" value="7" />
           <entry key="project.open.time.20" value="4" />
           <entry key="project.open.time.21" value="3" />
-          <entry key="project.open.time.23" value="4" />
+          <entry key="project.open.time.23" value="5" />
           <entry key="project.open.time.24" value="5" />
           <entry key="project.open.time.25" value="5" />
           <entry key="project.open.time.26" value="6" />
@@ -67,7 +67,7 @@
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="61" />
+          <entry key="project.opened" value="62" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -186,7 +186,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/wh/controller/app/PushController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="19" column="7" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+              <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -420,6 +420,28 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="CWXT" type="58d84e3e:PackageViewProjectNode" />
+              <item name="CWXT" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="CWXT" type="58d84e3e:PackageViewProjectNode" />
+              <item name="CWXT" type="616d4139:PackageViewModuleNode" />
+              <item name="com.wh" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="CWXT" type="58d84e3e:PackageViewProjectNode" />
+              <item name="CWXT" type="616d4139:PackageViewModuleNode" />
+              <item name="mapper" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -494,29 +516,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="Scope" />
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="CWXT" type="58d84e3e:PackageViewProjectNode" />
-              <item name="CWXT" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="CWXT" type="58d84e3e:PackageViewProjectNode" />
-              <item name="CWXT" type="616d4139:PackageViewModuleNode" />
-              <item name="com.wh" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="CWXT" type="58d84e3e:PackageViewProjectNode" />
-              <item name="CWXT" type="616d4139:PackageViewModuleNode" />
-              <item name="mapper" type="1f31426a:PackageElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -845,6 +845,7 @@
       <workItem from="1549631590597" duration="7036000" />
       <workItem from="1549641003828" duration="4755000" />
       <workItem from="1549672059005" duration="13291000" />
+      <workItem from="1549722307979" duration="40000" />
     </task>
     <task id="LOCAL-00001">
       <created>1544501286341</created>
@@ -1063,7 +1064,14 @@
       <option name="project" value="LOCAL" />
       <updated>1549709249366</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="ddd">
+      <created>1549722334033</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1549722334033</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1099,7 +1107,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="205769000" />
+    <option name="totallyTimeSpent" value="205809000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1112,7 +1120,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25037822" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -2533,7 +2540,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wh/controller/app/PushController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="19" column="7" lean-forward="true" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+          <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
         </state>
       </provider>
     </entry>
