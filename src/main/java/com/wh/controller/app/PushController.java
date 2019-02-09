@@ -18,7 +18,8 @@ import java.util.UUID;
 @RequestMapping("/pushController")
 public class PushController {
     /**
-     * 提交人李云文12
+     * 提交人李云文1
+     *
      */
 	@Autowired
 	private PushService pushService;
