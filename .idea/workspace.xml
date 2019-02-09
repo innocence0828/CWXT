@@ -184,8 +184,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/wh/controller/app/PushController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
+            <state relative-caret-position="140">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
             </state>
           </provider>
         </entry>
@@ -523,7 +523,7 @@
     <property name="SearchEverywhereHistoryKey" value="userController&#9;PSI&#9;JAVA://com.wh.controller.app.UserController&#10;StringUtils&#9;PSI&#9;JAVA://com.sun.xml.ws.util.StringUtils&#10;gexin&#9;FILE&#9;file://E:/CWXTIDEA/CWXT/src/main/webapp/WEB-INF/lib/gt/gexin-rp-fastjson-1.0.0.1.jar" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549707441094" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549707443091" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -843,7 +843,7 @@
       <workItem from="1549617613024" duration="9493000" />
       <workItem from="1549631590597" duration="7036000" />
       <workItem from="1549641003828" duration="4755000" />
-      <workItem from="1549672059005" duration="12421000" />
+      <workItem from="1549672059005" duration="12764000" />
     </task>
     <task id="LOCAL-00001">
       <created>1544501286341</created>
@@ -1091,7 +1091,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="201388000" />
+    <option name="totallyTimeSpent" value="201731000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2501,8 +2501,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wh/controller/app/PushController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
+        <state relative-caret-position="140">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
     </entry>
