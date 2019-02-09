@@ -18,6 +18,8 @@ import java.util.UUID;
 @RequestMapping("/pushController")
 public class PushController {
 
+
+	
 	@Autowired
 	private PushService pushService;
 	String stringRtrue;
